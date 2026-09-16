@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customize Your Gear — Jerome Walker</title>
+  <meta name="description" content="Build a motivational, customized flask to keep you hydrated on every workout.">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0a'/%3E%3Cpath d='M8 22V13l6 6 6-9v12' stroke='%23c9ff3a' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <style>
+
+/* =========================================================
+   JEROME WALKER — Stylesheet
+   Design tokens: monochrome premium fitness identity
+   Fonts: Manrope (display) / Inter (body, data)
+   ========================================================= */
+
+/* ---------- Tokens ---------- */
+:root {
+  --black: #0a0a0a;
+  --charcoal: #1a1a1a;
+  --charcoal-soft: #232323;
+  --gray-700: #4a4a4a;
+  --gray-500: #8a8a8a;
+  --gray-300: #d4d2ce;
+  --off-white: #f4f3f0;
+  --white: #ffffff;
+  --accent: #c9ff3a; /* subtle single accent, used sparingly */
+  --line: rgba(10, 10, 10, 0.1);
+  --line-dark: rgba(255, 255, 255, 0.12);
+
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 20px 50px rgba(10, 10, 10, 0.08);
+  --shadow-card: 0 10px 30px rgba(10, 10, 10, 0.06);
+
+  --container: 1240px;
+  --nav-height: 84px;
+}
+
+/* ---------- Reset ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Always respect the hidden attribute, even on elements with an explicit
+   display value set elsewhere (e.g. modals, toggled grids). Without this,
+   author CSS with display:flex/grid/etc. beats the browser's default
+   [hidden] rule and the element never actually hides. */
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--off-white);
+  color: var(--black);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.section-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 30px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--black);
+  color: var(--white);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(10, 10, 10, 0.25);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--black);
+  border: 1.5px solid var(--black);
+}
+.btn-outline:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-small { padding: 12px 22px; font-size: 0.85rem; }
+.btn-lg { padding: 20px 42px; font-size: 1.05rem; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(244, 243, 240, 0.85);
+  backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--line);
+  box-shadow: 0 8px 24px rgba(10, 10, 10, 0.05);
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  height: var(--nav-height);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-links a {
+  font-size: 0.92rem;
+  font-weight: 600;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--black);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--black);
+  margin: 0 auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  background: var(--off-white);
+  border-top: 1px solid var(--line);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.mobile-nav.open { max-height: 320px; }
+
+.mobile-nav a {
+  padding: 18px 32px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: calc(var(--nav-height) + 64px) 32px 90px;
+  background: var(--off-white);
+}
+
+.hero-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-700);
+  margin-bottom: 18px;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  margin-bottom: 22px;
+}
+
+.hero-sub {
+  font-size: 1.08rem;
+  color: var(--gray-700);
+  max-width: 480px;
+  margin-bottom: 34px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 36px;
+}
+
+.stat { display: flex; flex-direction: column; gap: 4px; }
+
+.stat-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.stat-label {
+  font-size: 0.76rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.hero-visual {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-soft);
+  background: var(--black);
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* crop toward the athlete + dashboard region of the source image */
+  object-position: 74% 40%;
+  transform: scale(1.28);
+}
+
+/* ---------- Section heads ---------- */
+.section-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  margin-bottom: 14px;
+}
+
+.section-head p {
+  color: var(--gray-700);
+  font-size: 1.05rem;
+}
+
+.section-head.light p,
+.section-head.light h2 { color: var(--white); }
+
+.section-head .disclaimer {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--gray-500);
+}
+
+/* ---------- Features ---------- */
+.features { padding: 120px 0; }
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 34px 28px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: transparent;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.feature-icon svg { width: 22px; height: 22px; }
+
+.feature-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: var(--gray-700);
+  font-size: 0.94rem;
+}
+
+/* ---------- Dashboard showcase ---------- */
+.dashboard-section {
+  background: var(--black);
+  color: var(--white);
+  padding: 120px 0;
+}
+
+.dashboard-mock {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 24px;
+}
+
+.dash-card {
+  background: var(--charcoal);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+
+.dash-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray-300);
+  margin-bottom: 24px;
+}
+
+.dash-pill {
+  background: var(--accent);
+  color: var(--black);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+.ring-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.progress-ring {
+  --size: 140px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background:
+    radial-gradient(closest-side, var(--charcoal) 72%, transparent 73% 100%),
+    conic-gradient(var(--white) calc(var(--pct) * 1%), rgba(255,255,255,0.14) 0);
+  flex-shrink: 0;
+}
+
+.progress-ring--lg { --size: 170px; margin: 0 auto; }
+
+.ring-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+.ring-unit {
+  font-size: 0.72rem;
+  color: var(--gray-300);
+  margin-top: 2px;
+}
+
+.dash-metric-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.dash-metric-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line-dark);
+  padding-bottom: 12px;
+  font-size: 0.92rem;
+  color: var(--gray-300);
+}
+
+.dash-metric-list strong {
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 140px;
+}
+
+.bar {
+  flex: 1;
+  height: var(--h);
+  background: linear-gradient(180deg, var(--white), var(--gray-300));
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.bar span {
+  position: absolute;
+  bottom: -24px;
+  font-size: 0.72rem;
+  color: var(--gray-500);
+}
+
+.dash-card--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ---------- Testimonials ---------- */
+.testimonials { padding: 120px 0; }
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+}
+
+.testimonial-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.t-name { font-weight: 700; font-size: 0.95rem; }
+.t-role { font-size: 0.78rem; color: var(--gray-500); }
+
+.stars {
+  color: var(--black);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+
+.t-quote {
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  background: var(--black);
+  color: var(--white);
+  padding: 130px 0;
+  text-align: center;
+}
+
+.cta-inner h2 {
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  margin-bottom: 18px;
+}
+
+.cta-inner p {
+  color: var(--gray-300);
+  font-size: 1.05rem;
+  margin-bottom: 42px;
+}
+
+.cta .btn-primary {
+  background: var(--white);
+  color: var(--black);
+}
+.cta .btn-primary:hover {
+  box-shadow: 0 14px 34px rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--off-white);
+  border-top: 1px solid var(--line);
+  padding: 70px 0 0;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 50px;
+}
+
+.footer-brand { max-width: 300px; }
+
+.footer-logo {
+  height: 34px;
+  width: 34px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  mix-blend-mode: multiply;
+}
+
+.footer-brand p {
+  color: var(--gray-700);
+  font-size: 0.9rem;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.footer-nav a { transition: opacity 0.2s ease; }
+.footer-nav a:hover { opacity: 0.6; }
+
+.footer-social {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social svg { width: 17px; height: 17px; }
+
+.footer-social a:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translate(-50%, 20px);
+  background: var(--black);
+  color: var(--white);
+  padding: 16px 26px;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 200;
+  max-width: calc(100vw - 48px);
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+.feature-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+.feature-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+.testimonial-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+.testimonial-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+
+/* =========================================================
+   RESPONSIVE — Tablet (768–1024px)
+   ========================================================= */
+@media (max-width: 1024px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-mock {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dash-card--wide { grid-column: 1 / -1; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; max-width: none; }
+  .hero-inner { gap: 28px; }
+}
+
+/* =========================================================
+   RESPONSIVE — Mobile (≤767px)
+   ========================================================= */
+@media (max-width: 767px) {
+  .nav-links, .nav-actions .btn-primary { display: none; }
+  .hamburger { display: flex; }
+  .mobile-nav { display: flex; }
+
+  .nav-wrap { padding: 0 20px; }
+  .section-inner { padding: 0 20px; }
+
+  .hero {
+    padding: calc(var(--nav-height) + 40px) 20px 64px;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .hero-visual { order: -1; aspect-ratio: 4 / 3; }
+  .hero-photo { object-position: 88% 30%; transform: scale(2); }
+  .hero-title { font-size: clamp(2.1rem, 9vw, 2.6rem); }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; }
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+
+  .features, .testimonials { padding: 72px 0; }
+  .dashboard-section { padding: 72px 0; }
+  .section-head { margin-bottom: 40px; }
+
+  .feature-grid { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .dashboard-mock { grid-template-columns: 1fr; }
+  .dash-card--wide { grid-column: auto; }
+
+  .ring-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+
+  .cta { padding: 80px 0; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-social { justify-content: flex-start; }
+
+  .btn, .brand-name, .nav-links a { font-size: inherit; }
+  .btn { min-height: 48px; }
+}
+
+
+/* =========================================================
+   JEROME WALKER — React sections
+   Coach Arena / Equipment Shop / Flask Studio
+   Reuses design tokens declared in index.html's :root
+   ========================================================= */
+
+.widget-fallback {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--gray-500);
+  font-size: 0.95rem;
+}
+
+/* Shared: filter chip row ------------------------------------------------ */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.chip {
+  padding: 9px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.chip:hover { border-color: var(--black); color: var(--black); }
+
+.chip[aria-pressed="true"] {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--off-white);
+}
+
+/* =========================================================
+   COACH ARENA
+   ========================================================= */
+.coach-arena { background: var(--off-white); padding: 100px 0; }
+
+.coach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.coach-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.coach-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+
+.coach-card.is-selected { border-color: var(--accent); }
+
+.coach-top { display: flex; align-items: center; gap: 14px; }
+
+.coach-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.coach-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+.coach-specialty { font-size: 0.85rem; color: var(--gray-500); }
+
+.coach-tagline { font-size: 0.92rem; color: var(--gray-700); flex-grow: 1; }
+
+.coach-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--gray-500);
+}
+
+.coach-rating { color: var(--black); font-weight: 700; }
+
+.coach-choose-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  background: var(--black);
+  color: var(--off-white);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.coach-choose-btn:hover { background: var(--charcoal); }
+
+.coach-choose-btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--black);
+}
+
+.coach-selection-banner {
+  margin-top: 32px;
+  padding: 22px 26px;
+  background: var(--black);
+  color: var(--off-white);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.coach-selection-banner strong { color: var(--accent); }
+
+.coach-selection-banner .btn-outline {
+  border-color: var(--line-dark);
+  color: var(--off-white);
+  padding: 10px 20px;
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   EQUIPMENT SHOP
+   ========================================================= */
+.equipment-shop { background: var(--white); padding: 100px 0; }
+
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.shop-search {
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 12px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--line);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.shop-search:focus-visible { border-color: var(--black); }
+
+.shop-sort {
+  padding: 12px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--line);
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  background: var(--white);
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.shop-card {
+  background: var(--off-white);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-card);
+}
+
+.shop-card-image-wrap {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+
+.shop-card-image-wrap img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.shop-card-category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.shop-card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6em;
+}
+
+.shop-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.shop-card-price { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; }
+
+.shop-card-rating { font-size: 0.78rem; color: var(--gray-500); }
+
+.shop-card-btn {
+  width: 100%;
+  padding: 11px;
+  border-radius: 100px;
+  border: 1.5px solid var(--black);
+  font-weight: 700;
+  font-size: 0.82rem;
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.shop-card-btn:hover { background: var(--black); color: var(--off-white); }
+
+/* Skeleton loading state */
+.shop-card.is-skeleton .skeleton {
+  background: linear-gradient(90deg, var(--gray-300) 25%, #e9e7e1 37%, var(--gray-300) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-img { height: 180px; }
+.skeleton-line { height: 14px; margin: 4px 0; }
+.skeleton-line.w-60 { width: 60%; }
+.skeleton-line.w-80 { width: 80%; }
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.shop-status-panel {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--off-white);
+  border-radius: var(--radius-md);
+}
+
+.shop-status-panel p { color: var(--gray-700); margin-bottom: 18px; }
+
+.shop-status-panel .btn { margin: 0 auto; }
+
+/* Product modal */
+.shop-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+}
+
+.shop-modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  max-width: 640px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 36px;
+  position: relative;
+}
+
+.shop-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-modal-close:hover { background: var(--black); color: var(--off-white); border-color: var(--black); }
+
+.shop-modal-body { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 10px; }
+
+.shop-modal-image { flex: 1; min-width: 200px; background: var(--off-white); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; padding: 24px; }
+
+.shop-modal-image img { max-height: 240px; }
+
+.shop-modal-info { flex: 1.4; min-width: 240px; }
+
+.shop-modal-info h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 10px; }
+
+.shop-modal-info p { color: var(--gray-700); font-size: 0.92rem; margin-bottom: 18px; }
+
+/* =========================================================
+   FLASK STUDIO
+   ========================================================= */
+.flask-studio { background: var(--charcoal); color: var(--off-white); padding: 100px 0; }
+
+.flask-studio .section-head h2,
+.flask-studio .section-head p { color: var(--off-white); }
+.flask-studio .section-head .eyebrow { color: var(--accent); }
+
+.flask-builder {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.flask-preview-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.flask-shape {
+  width: 140px;
+  height: 300px;
+  border-radius: 30px 30px 46px 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 14px;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+.flask-shape::before {
+  content: '';
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 26px;
+  border-radius: 8px 8px 0 0;
+  background: inherit;
+  filter: brightness(0.85);
+}
+
+.flask-message {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.flask-size-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 0; right: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.flask-options label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-300);
+  margin-bottom: 10px;
+}
+
+.flask-option-group { margin-bottom: 26px; }
+
+.flask-color-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.flask-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--gray-300);
+  padding: 4px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+}
+
+.flask-swatch .dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--line-dark);
+}
+
+.flask-swatch[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--off-white);
+}
+
+.flask-size-select,
+.flask-message-input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line-dark);
+  background: var(--black);
+  color: var(--off-white);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.flask-message-input:focus-visible,
+.flask-size-select:focus-visible { border-color: var(--accent); }
+
+.flask-preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+.flask-preset-btn {
+  padding: 7px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--line-dark);
+  font-size: 0.76rem;
+  color: var(--gray-300);
+}
+
+.flask-preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.flask-order-btn {
+  margin-top: 6px;
+  background: var(--accent);
+  color: var(--black);
+}
+
+.flask-order-btn:hover { background: var(--off-white); }
+
+/* ---------- Product-type tabs ---------- */
+.customize-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.customize-tab {
+  padding: 11px 20px;
+  border-radius: 100px;
+  border: 1.5px solid var(--line-dark);
+  background: transparent;
+  color: var(--gray-300);
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.customize-tab:hover { border-color: var(--accent); color: var(--accent); }
+
+.customize-tab[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+}
+
+/* ---------- Real photo preview (replaces the flat color box) ---------- */
+.customize-preview-frame {
+  width: 220px;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.3s ease;
+}
+
+.customize-preview-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+  background: var(--charcoal-soft);
+}
+
+.customize-preview-caption {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.customize-preview-message {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+  transition: color 0.3s ease;
+}
+
+.customize-preview-size {
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.7;
+  margin-top: 4px;
+  transition: color 0.3s ease;
+}
+
+.customize-image-note {
+  font-size: 0.76rem;
+  color: var(--gray-500);
+  text-align: center;
+  max-width: 220px;
+  margin-top: 14px;
+}
+
+/* =========================================================
+   RESPONSIVE — Tablet (≤1024px)
+   ========================================================= */
+@media (max-width: 1024px) {
+  .coach-grid { grid-template-columns: repeat(2, 1fr); }
+  .shop-grid { grid-template-columns: repeat(2, 1fr); }
+  .flask-builder { grid-template-columns: 1fr; }
+  .flask-preview-stage { order: -1; padding: 10px 0 30px; }
+}
+
+/* =========================================================
+   RESPONSIVE — Mobile (≤767px)
+   ========================================================= */
+@media (max-width: 767px) {
+  .coach-arena, .equipment-shop, .flask-studio { padding: 70px 0; }
+  .coach-grid { grid-template-columns: 1fr; }
+  .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .shop-toolbar { flex-direction: column; align-items: stretch; }
+  .shop-search, .shop-sort { max-width: none; }
+  .shop-modal { padding: 26px; }
+  .shop-modal-body { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .shop-grid { grid-template-columns: 1fr; }
+  .coach-selection-banner { flex-direction: column; align-items: flex-start; }
+}
+
+/* =========================================================
+   Shared: simple page hero (used by coaches / gear / flasks pages)
+   ========================================================= */
+.page-hero {
+  padding: 160px 0 40px;
+  background: var(--off-white);
+}
+
+.page-hero .section-inner { max-width: 760px; }
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 10px 0 14px;
+}
+
+.page-hero-sub { color: var(--gray-700); font-size: 1.05rem; }
+
+.flask-hero { background: var(--charcoal); color: var(--off-white); }
+.flask-hero .eyebrow { color: var(--accent); }
+.flask-hero .page-hero-sub { color: var(--gray-300); }
+
+/* =========================================================
+   EXPLORE MORE (homepage teaser cards)
+   ========================================================= */
+.explore-more { background: var(--off-white); padding: 100px 0; }
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1180px) {
+  .explore-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.explore-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  display: block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.explore-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+
+.explore-icon { font-size: 2rem; display: block; margin-bottom: 14px; }
+
+.explore-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.explore-card p { color: var(--gray-700); font-size: 0.92rem; margin-bottom: 16px; }
+
+.explore-link { font-weight: 700; font-size: 0.88rem; color: var(--black); }
+
+@media (max-width: 1024px) {
+  .explore-grid { grid-template-columns: 1fr; }
+}
+
+  
+</style>
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <div class="nav-wrap">
+      <a href="index.html" class="brand" aria-label="Jerome Walker home">
+        <img src="images/logo.jpg" alt="Jerome Walker logo" class="brand-logo">
+        <span class="brand-name">JEROME<br>WALKER</span>
+      </a>
+
+      <nav class="nav-links" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Tracking</a>
+        <a href="coaches.html">Coaches</a>
+        <a href="equipment.html">Gear</a>
+        <a href="customize.html">Customize</a>
+        <a href="mall.html">Mall</a>
+        <a href="index.html#testimonials">Reviews</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#cta" class="btn btn-primary btn-small">Get Started</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Tracking</a>
+      <a href="coaches.html">Coaches</a>
+      <a href="equipment.html">Gear</a>
+      <a href="customize.html">Customize</a>
+        <a href="mall.html">Mall</a>
+      <a href="index.html#testimonials">Reviews</a>
+      <a href="index.html#cta">Get Started</a>
+    </nav>
+  </header>
+
+<main>
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero flask-hero">
+      <div class="section-inner">
+        <p class="eyebrow">Make it yours</p>
+        <h1>Customize Your Gear</h1>
+        <p class="page-hero-sub">Build a flask, water bottle, snacks pouch or backpack with your own color, size and motivational message.</p>
+      </div>
+    </section>
+
+    <!-- ================= CUSTOMIZE STUDIO ================= -->
+    <section class="flask-studio">
+      <div class="section-inner">
+        <div class="customize-tabs" id="customize-tabs" role="group" aria-label="Choose a product to customize">
+          <button type="button" class="customize-tab" data-type="flask" aria-pressed="true">Flask</button>
+          <button type="button" class="customize-tab" data-type="bottle" aria-pressed="false">Water Bottle</button>
+          <button type="button" class="customize-tab" data-type="pouch" aria-pressed="false">Snacks Pouch</button>
+          <button type="button" class="customize-tab" data-type="backpack" aria-pressed="false">Backpack</button>
+        </div>
+
+        <div class="flask-builder">
+          <div class="flask-preview-stage">
+            <div class="customize-preview-frame" id="customize-frame" style="background-color:#0a0a0a;">
+              <img class="customize-preview-img" id="customize-preview-img" src="flask.jpg" alt="Flask preview photo">
+              <div class="customize-preview-caption">
+                <p class="customize-preview-message" id="customize-message-preview" style="color:#f4f3f0;">STAY STRONG</p>
+                <span class="customize-preview-size" id="customize-size-preview" style="color:#f4f3f0;">750ml</span>
+              </div>
+            </div>
+            <p class="customize-image-note"></p>
+          </div>
+
+          <div class="flask-options">
+            <div class="flask-option-group">
+              <label id="customize-color-label">Color</label>
+              <div class="flask-color-row" id="customize-color-row" role="group" aria-labelledby="customize-color-label"></div>
+            </div>
+
+            <div class="flask-option-group">
+              <label for="customize-size" id="customize-size-label">Size</label>
+              <select id="customize-size" class="flask-size-select"></select>
+            </div>
+
+            <div class="flask-option-group">
+              <label for="customize-message" id="customize-message-label">Motivational engraving</label>
+              <input id="customize-message" class="flask-message-input" type="text" maxlength="24" value="STAY STRONG" placeholder="e.g. STAY STRONG">
+              <div class="flask-preset-row" id="customize-preset-row"></div>
+            </div>
+
+            <button class="btn flask-order-btn" type="button" id="customize-add-btn">Add Flask to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</main>
+
+  <footer class="site-footer">
+    <div class="section-inner footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo.jpg" alt="Jerome Walker logo" class="footer-logo">
+        <p>A smarter way to track your movement, workouts, and fitness progress.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Tracking</a>
+        <a href="coaches.html">Coaches</a>
+        <a href="equipment.html">Gear</a>
+        <a href="customize.html">Customize</a>
+        <a href="mall.html">Mall</a>
+        <a href="index.html#testimonials">Reviews</a>
+      </nav>
+
+      <div class="footer-social" aria-label="Social media links">
+        <a href="#" aria-label="Jerome Walker on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="#" aria-label="Jerome Walker on X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 3H21l-6.5 7.4L22 21h-6.4l-5-6.6L4.7 21H2l7-8-7-10h6.5l4.5 6z"/></svg>
+        </a>
+        <a href="#" aria-label="Jerome Walker on Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
+        </a>
+        <a href="#" aria-label="Jerome Walker on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 13v4"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 Jerome Walker. All rights reserved.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+/* ---------- Header scroll state ---------- */
+const siteHeader = document.querySelector('.site-header');
+
+function updateHeaderState() {
+  siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+}
+
+updateHeaderState();
+window.addEventListener('scroll', updateHeaderState, { passive: true });
+
+/* ---------- Mobile navigation ---------- */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+
+function closeMobileNav() {
+  hamburger.classList.remove('open');
+  mobileNav.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+
+function toggleMobileNav() {
+  const isOpen = mobileNav.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+}
+
+hamburger.addEventListener('click', toggleMobileNav);
+
+mobileNav.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', closeMobileNav);
+});
+
+/* ---------- Smooth scrolling for in-page links ---------- */
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const targetId = link.getAttribute('href');
+    if (targetId.length < 2) return;
+    const target = document.querySelector(targetId);
+    if (!target) return;
+
+    e.preventDefault();
+    const navHeight = document.querySelector('.site-header').offsetHeight;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - (navHeight - 1);
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+/* ---------- Toast notification (used by every page) ---------- */
+const toast = document.getElementById('toast');
+let toastTimer;
+
+function showToast(message) {
+  clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.classList.add('show');
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+}
+
+// Exposed globally so each page's own script (loaded after this one) can
+// call window.showToast(...) without redefining it.
+window.showToast = showToast;
+
+/* ---------- Scroll reveal animations ---------- */
+const revealEls = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('in-view'));
+}
+
+/* ---------- Customize Studio (Flask / Bottle / Pouch / Backpack) ---------- */
+const customizeProducts = {
+  flask: {
+    label: 'Flask',
+    image: 'images/flask.jpg',
+    colors: [
+      { label: 'Black', hex: '#0a0a0a', text: '#f4f3f0' },
+      { label: 'Off-White', hex: '#f4f3f0', text: '#0a0a0a' },
+      { label: 'Charcoal', hex: '#1a1a1a', text: '#f4f3f0' },
+      { label: 'Lime', hex: '#c9ff3a', text: '#0a0a0a' }
+    ],
+    sizes: ['500ml', '750ml', '1L'],
+    defaultSize: '750ml',
+    messageLabel: 'Motivational engraving',
+    presets: ['STAY STRONG', 'ONE MORE REP', 'KEEP MOVING', 'NO EXCUSES'],
+    defaultMessage: 'STAY STRONG',
+    addBtnLabel: 'Add Flask to Cart'
+  },
+  bottle: {
+    label: 'Water Bottle',
+    image: 'images/bottle.jpg',
+    colors: [
+      { label: 'Black', hex: '#0a0a0a', text: '#f4f3f0' },
+      { label: 'Off-White', hex: '#f4f3f0', text: '#0a0a0a' },
+      { label: 'Steel Grey', hex: '#8a8a8a', text: '#0a0a0a' },
+      { label: 'Lime', hex: '#c9ff3a', text: '#0a0a0a' }
+    ],
+    sizes: ['500ml', '1L', '1.5L'],
+    defaultSize: '1L',
+    messageLabel: 'Motivational engraving',
+    presets: ['STAY STRONG', 'HYDRATE', 'NO EXCUSES', 'KEEP MOVING'],
+    defaultMessage: 'HYDRATE',
+    addBtnLabel: 'Add Bottle to Cart'
+  },
+  pouch: {
+    label: 'Snacks Pouch',
+    image: 'images/pouch.jpg',
+    colors: [
+      { label: 'Black', hex: '#0a0a0a', text: '#f4f3f0' },
+      { label: 'Charcoal', hex: '#1a1a1a', text: '#f4f3f0' },
+      { label: 'Off-White', hex: '#f4f3f0', text: '#0a0a0a' },
+      { label: 'Lime', hex: '#c9ff3a', text: '#0a0a0a' }
+    ],
+    sizes: ['Small', 'Medium', 'Large'],
+    defaultSize: 'Medium',
+    messageLabel: 'Patch text',
+    presets: ['REFUEL', 'FUEL UP', 'NO EXCUSES', 'STAY STRONG'],
+    defaultMessage: 'REFUEL',
+    addBtnLabel: 'Add Pouch to Cart'
+  },
+  backpack: {
+    label: 'Backpack',
+    image: 'images/backpack.jpg',
+    colors: [
+      { label: 'Black', hex: '#0a0a0a', text: '#f4f3f0' },
+      { label: 'Charcoal', hex: '#1a1a1a', text: '#f4f3f0' },
+      { label: 'Off-White', hex: '#f4f3f0', text: '#0a0a0a' },
+      { label: 'Lime', hex: '#c9ff3a', text: '#0a0a0a' }
+    ],
+    sizes: ['20L', '28L', '35L'],
+    defaultSize: '28L',
+    messageLabel: 'Patch text',
+    presets: ['BUILT FOR THE JOURNEY', 'NO EXCUSES', 'KEEP MOVING', 'STAY STRONG'],
+    defaultMessage: 'BUILT FOR THE JOURNEY',
+    addBtnLabel: 'Add Backpack to Cart'
+  }
+};
+
+const customizeTabs = document.querySelectorAll('.customize-tab');
+const customizeFrame = document.getElementById('customize-frame');
+const customizePreviewImg = document.getElementById('customize-preview-img');
+const customizeMessagePreview = document.getElementById('customize-message-preview');
+const customizeSizePreview = document.getElementById('customize-size-preview');
+const customizeColorLabel = document.getElementById('customize-color-label');
+const customizeColorRow = document.getElementById('customize-color-row');
+const customizeSizeLabel = document.getElementById('customize-size-label');
+const customizeSizeSelect = document.getElementById('customize-size');
+const customizeMessageLabel = document.getElementById('customize-message-label');
+const customizeMessageInput = document.getElementById('customize-message');
+const customizePresetRow = document.getElementById('customize-preset-row');
+const customizeAddBtn = document.getElementById('customize-add-btn');
+
+let currentType = 'flask';
+let currentColorLabel = customizeProducts.flask.colors[0].label;
+
+function renderCustomizeProduct(type) {
+  const product = customizeProducts[type];
+  currentType = type;
+
+  // Photo
+  customizePreviewImg.src = product.image;
+  customizePreviewImg.alt = product.label + ' preview photo';
+
+  // Colors
+  currentColorLabel = product.colors[0].label;
+  customizeFrame.style.backgroundColor = product.colors[0].hex;
+  customizeMessagePreview.style.color = product.colors[0].text;
+  customizeSizePreview.style.color = product.colors[0].text;
+
+  customizeColorLabel.textContent = 'Color';
+  customizeColorRow.innerHTML = product.colors.map((c, i) => (
+    '<button type="button" class="flask-swatch" data-label="' + c.label + '" data-hex="' + c.hex + '" data-text="' + c.text + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '">' +
+      '<span class="dot" style="background:' + c.hex + '"></span>' + c.label +
+    '</button>'
+  )).join('');
+
+  customizeColorRow.querySelectorAll('.flask-swatch').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      customizeColorRow.querySelectorAll('.flask-swatch').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      customizeFrame.style.backgroundColor = btn.dataset.hex;
+      customizeMessagePreview.style.color = btn.dataset.text;
+      customizeSizePreview.style.color = btn.dataset.text;
+      currentColorLabel = btn.dataset.label;
+    });
+  });
+
+  // Sizes
+  customizeSizeLabel.textContent = 'Size';
+  customizeSizeSelect.innerHTML = product.sizes.map((s) => (
+    '<option value="' + s + '"' + (s === product.defaultSize ? ' selected' : '') + '>' + s + '</option>'
+  )).join('');
+  customizeSizePreview.textContent = product.defaultSize;
+
+  // Message
+  customizeMessageLabel.textContent = product.messageLabel;
+  customizeMessageInput.value = product.defaultMessage;
+  customizeMessagePreview.textContent = product.defaultMessage;
+  customizePresetRow.innerHTML = product.presets.map((p) => (
+    '<button type="button" class="flask-preset-btn" data-preset="' + p + '">' + p + '</button>'
+  )).join('');
+  customizePresetRow.querySelectorAll('.flask-preset-btn').forEach((btn) => {
+    btn.addEventListener('click', () => updateCustomizeMessage(btn.dataset.preset));
+  });
+
+  customizeAddBtn.textContent = product.addBtnLabel;
+}
+
+function updateCustomizeMessage(value) {
+  const upper = value.toUpperCase();
+  customizeMessageInput.value = upper;
+  customizeMessagePreview.textContent = upper || 'YOUR MESSAGE HERE';
+}
+
+customizeSizeSelect.addEventListener('change', () => {
+  customizeSizePreview.textContent = customizeSizeSelect.value;
+});
+
+customizeMessageInput.addEventListener('input', (e) => updateCustomizeMessage(e.target.value));
+
+customizeTabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    customizeTabs.forEach((t) => t.setAttribute('aria-pressed', 'false'));
+    tab.setAttribute('aria-pressed', 'true');
+    renderCustomizeProduct(tab.dataset.type);
+  });
+});
+
+customizeAddBtn.addEventListener('click', () => {
+  const message = customizeMessageInput.value || 'no message';
+  const product = customizeProducts[currentType];
+  showToast(customizeSizeSelect.value + ' ' + currentColorLabel + ' ' + product.label + ' \u2014 "' + message + '" added to cart.');
+});
+
+renderCustomizeProduct('flask');
+
+});
+</script>
+</body>
+</html>
