@@ -1,4 +1,4 @@
-# Jerome Walker — Fitness Ecosystem (Task 3)
+# Jerome Walker — Fitness Ecosystem 
 
 A premium, monochrome fitness platform combining tracking-brand identity, a coach
 discovery directory, a live product catalog, a gear customizer, and a snacks
@@ -6,8 +6,8 @@ mini-mall — built on top of the Task 1 landing page.
 
 ## Project Overview
 
-Jerome Walker started as a responsive landing page (Task 1) and has been
-extended here into a small multi-page, dynamic web application for Task 3. It
+Jerome Walker started as a responsive landing page  and has been
+extended here into a small multi-page, dynamic web application for Task. It
 keeps the same premium/minimal/masculine visual identity (black, off-white,
 charcoal, single lime accent, Manrope + Inter typography) across every page.
 
@@ -112,7 +112,7 @@ No build tools required.
 
 ## Live Deployment
 
-Live URL: <add link>
-GitHub repo: <add link>
+Live URL: 
+GitHub repo: 
 
 
